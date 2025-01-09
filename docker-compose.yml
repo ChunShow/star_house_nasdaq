@@ -1,0 +1,33 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev # 개발 환경용 Dockerfile
+    ports:
+      - '3000:3000' # APP_PORT 환경 변수 참조
+    volumes:
+      - .:/app # 로컬 파일과 동기화
+    environment:
+      # DB_HOST는 localhost가 아니라 'db'로 설정
+      DB_HOST: db
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_NAME: ${POSTGRES_DB}
+    depends_on:
+      - db
+    command: ['npm', 'run', 'start:dev']
+  db:
+    image: postgres:17
+    container_name: postgres-db
+    ports:
+      - '${DB_PORT}:${DB_PORT}' # 환경 변수 참조
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -7,6 +7,16 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    return this.appService.getHello();
+    return process.env.NODE_ENV;
+  }
+
+  @Get('users')
+  async findAllUsers() {
+    console.log('find all users');
+    return this.appService.findAllUsers();
+  }
+  @Post('users')
+  async createUser() {
+    return this.appService.createUser('test', 'user');
   }
 }
