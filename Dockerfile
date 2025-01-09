@@ -9,7 +9,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Step 4: 의존성 설치 (아직 소스코드를 복사해오지는 않았지만, 위에서 package.json을 복사해왔기 때문에 의존성을 먼저 설치할 수 있다)
-RUN RUN npm install --include=dev
+RUN npm install --include=dev
 
 # Step 5: 소스 코드 복사 (. .이라 이게 무슨 소리인가 할 수 있지만, 첫번째 .은 호스트의 현재 디렉토리를 의미하고, 두번째 .은 도커 컨테이너의 작업 디렉토리를 의미한다)
 COPY . .
