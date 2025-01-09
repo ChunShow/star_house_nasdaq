@@ -7,7 +7,7 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    return '잘 작동하는구만!';
+    return 'CD TEST 위한 수정';
   }
 
   @Get('users')
