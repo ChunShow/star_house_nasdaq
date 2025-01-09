@@ -7,7 +7,7 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    return process.env.NODE_ENV;
+    return '잘 작동하는구만!';
   }
 
   @Get('users')
