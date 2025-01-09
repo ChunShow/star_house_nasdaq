@@ -16,8 +16,11 @@ import { typeORMConfig } from 'config/typeorm.config';
         process.env.NODE_ENV === 'development'
           ? // 명시적으로 developemnt로 세팅되어 있는 경우에만 이걸 사용한다
             '.env.development.local'
-          : '.env',
+          : process.env.NODE_ENV === 'production'
+            ? undefined
+            : '.env',
       ],
+      ignoreEnvFile: process.env.NODE_ENV === 'production',
       load: [configuration],
     }),
     TypeOrmModule.forRootAsync({
